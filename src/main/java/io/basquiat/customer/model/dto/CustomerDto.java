@@ -11,10 +11,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static io.basquiat.common.utils.CommonUtils.isEmpty;
 
 /**
  * 고객 정보를 담은 DTO엔티티
@@ -31,9 +33,11 @@ public class CustomerDto {
         this.customerMobile = customer.getCustomerMobile();
         this.createdAt = customer.getCreatedAt();
         this.updatedAt = customer.getUpdatedAt();
-        if(addresses != null) {
+        if(!isEmpty(addresses)) {
             this.addresses = addresses.stream().map(addr -> new AddressDto(addr))
-                    .collect(Collectors.toList());
+                                               .collect(Collectors.toList());
+        } else {
+            this.addresses = (List<AddressDto>) Collections.EMPTY_LIST;
         }
     }
 

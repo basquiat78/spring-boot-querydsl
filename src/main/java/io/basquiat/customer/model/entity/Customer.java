@@ -1,11 +1,10 @@
 package io.basquiat.customer.model.entity;
 
-import com.querydsl.core.annotations.QueryProjection;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.basquiat.common.model.DateTimeCommon;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 @Table(name = "basquiat_customer", catalog = "basquiat")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @ToString
 public class Customer extends DateTimeCommon {
 
@@ -46,6 +45,7 @@ public class Customer extends DateTimeCommon {
     private String customerMobile;
 
     /** 고객 주소 리스트 */
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Address> addresses = new ArrayList<>();
 
