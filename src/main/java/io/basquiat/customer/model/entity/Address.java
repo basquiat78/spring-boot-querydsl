@@ -1,5 +1,6 @@
 package io.basquiat.customer.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.querydsl.core.annotations.QueryProjection;
 import io.basquiat.common.model.DateTimeCommon;
 import lombok.*;
@@ -57,6 +58,7 @@ public class Address extends DateTimeCommon {
     private AddressDefaultStatus addressDefaultStatus;
 
     /** 고객 */
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id")
     private Customer customer;

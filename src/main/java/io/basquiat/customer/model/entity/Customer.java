@@ -1,5 +1,6 @@
 package io.basquiat.customer.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.querydsl.core.annotations.QueryProjection;
 import io.basquiat.common.model.DateTimeCommon;
 import lombok.*;
@@ -46,6 +47,7 @@ public class Customer extends DateTimeCommon {
     private String customerMobile;
 
     /** 고객 주소 리스트 */
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Address> addresses = new ArrayList<>();
 
