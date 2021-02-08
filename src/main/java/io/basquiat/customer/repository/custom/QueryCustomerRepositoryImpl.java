@@ -25,25 +25,13 @@ public class QueryCustomerRepositoryImpl implements QueryCustomerRepository {
     private final JPAQueryFactory query;
 
     /**
-     * 그냥 엔티티 자체로 반환하기.
-     * @return List<Customer>
-     */
-    @Override
-    public List<Customer> findAllCustomer() {
-        JPAQuery<Customer> customerQuery = query.selectFrom(customer)
-                                                .leftJoin(customer.addresses, address)
-                                                .fetchJoin();
-        return customerQuery.fetch();
-    }
-
-    /**
      * DTO에 담아서 반환하기
      * @return List<CustomerDto>
      */
     @Override
     public List<CustomerDto> findAllCustomerDto() {
         Map<Customer, List<Address>> map = query.from(customer)
-                                                .leftJoin(customer.addresses, address)
+                                                .leftJoin(address).on(customer.id.eq(address.customerId))
                                                 .transform(groupBy(customer).as(list(address)));
         return map.entrySet().stream()
                              .map(obj -> new CustomerDto(obj.getKey(), obj.getValue()))

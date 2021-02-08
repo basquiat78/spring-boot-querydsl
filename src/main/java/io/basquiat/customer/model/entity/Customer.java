@@ -45,10 +45,6 @@ public class Customer extends DateTimeCommon {
     @Column(name = "customer_mobile", length = 50)
     private String customerMobile;
 
-    /** 고객 주소 리스트 */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    private List<Address> addresses = new ArrayList<>();
-
     public void changeCustomerEmail(String email) {
         this.customerEmail = email;
     }

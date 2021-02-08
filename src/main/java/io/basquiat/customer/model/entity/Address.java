@@ -20,20 +20,24 @@ import java.util.List;
 public class Address extends DateTimeCommon {
 
     @Builder
-    public Address(String addressName, String addressPostcode, String addressInfo, String addressDetail,
-                   AddressDefaultStatus addressDefaultStatus, Customer customer) {
+    public Address(Long customerId, String addressName, String addressPostcode, String addressInfo, String addressDetail,
+                   AddressDefaultStatus addressDefaultStatus) {
+        this.customerId = customerId;
         this.addressName = addressName;
         this.addressPostcode = addressPostcode;
         this.addressInfo = addressInfo;
         this.addressDetail = addressDetail;
         this.addressDefaultStatus = addressDefaultStatus;
-        this.customer = customer;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    /** 고객 아이디 */
+    @Column(name = "customer_id")
+    private Long customerId;
 
     /** 고객 주소 설정명 */
     @Column(name = "addr_name", length = 20)
@@ -55,11 +59,6 @@ public class Address extends DateTimeCommon {
     @Column(name = "is_default", length = 1)
     @Enumerated(EnumType.STRING)
     private AddressDefaultStatus addressDefaultStatus;
-
-    /** 고객 */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
     /**
      * 대표 주소 여부 enum

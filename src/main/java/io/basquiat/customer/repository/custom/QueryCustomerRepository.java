@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface QueryCustomerRepository {
 
-    List<Customer> findAllCustomer();
     List<CustomerDto> findAllCustomerDto();
 
 }
