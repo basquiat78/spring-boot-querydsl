@@ -1637,3 +1637,5 @@ Hibernate:
 [* 번외 : 외래키 설정이 없고 relation을 사용하지 않는다면 어떨까?](https://github.com/basquiat78/spring-boot-querydsl/tree/no-relation-eg)
 
 [1. 동적 쿼리](https://github.com/basquiat78/spring-boot-querydsl/tree/dynamic-search-dsl)
+
+[2. 페이징](https://github.com/basquiat78/spring-boot-querydsl/tree/query-dsl-paging)
